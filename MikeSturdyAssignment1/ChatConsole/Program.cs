@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChatLib;
 
-namespace ChatLib
+namespace ChatConsole
 {
     class Program
     {
