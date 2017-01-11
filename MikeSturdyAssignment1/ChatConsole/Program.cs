@@ -68,6 +68,15 @@ namespace ChatConsole
                             text = Console.ReadLine();
                             if (text == "quit")
                             {
+                            text = "The other person has left the session";
+                                try
+                                {
+                                    client.Send(text);//inform the other user you have disconnected
+                                }
+                                catch (Exception e)
+                                {
+                                Environment.Exit(0);
+                                }
                                 Console.WriteLine("Good Bye");
                                 Environment.Exit(0);
                             }
@@ -78,7 +87,6 @@ namespace ChatConsole
                         catch(Exception e)
                         {
                             Console.WriteLine("Connection Lost");
-                            Console.WriteLine(e);
                             Console.Read();
                             Environment.Exit(0);
                         }
