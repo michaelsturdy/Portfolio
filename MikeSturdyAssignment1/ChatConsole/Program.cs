@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ChatLib2;
-using System.Threading;
+
 
 
 //https://msdn.microsoft.com/en-us/library/system.net.sockets.tcplistener(v=vs.110).aspx
@@ -16,7 +12,7 @@ namespace ChatConsole
         
         static void Main(string[] args)
         {
-            string resData = null;// variable for received data
+            string responseData = null;// variable for received data
             string text = null;//input variable for sending
             bool connected; // variable to see if there is a connection
             Parent client;//variable to hold server or client object
@@ -26,7 +22,7 @@ namespace ChatConsole
                 client = new Server();
                 Console.WriteLine("Waiting for a connection...");
                 connected = client.Connect();
-                if (connected)//if a connection is established open the stream
+                if (connected)
                 {
                     Console.WriteLine("Connected");
                     client.Stream();
@@ -56,12 +52,12 @@ namespace ChatConsole
                     Environment.Exit(0);
                 }
                              
-            }//end else
+            }
             Console.WriteLine("Press I to enter input mode and enter to send");
             Console.WriteLine("Type quit as a message to exit");
             while (true)//listening loop
                 {
-                   resData = client.Recieve();
+                   responseData = client.Recieve();
               
                     if (Console.KeyAvailable)
                     {
@@ -94,10 +90,10 @@ namespace ChatConsole
                             Console.WriteLine("Press I to send a message");
                         }
                     }
-                    if (resData != null)
+                    if (responseData != null)
                     { 
-                        Console.WriteLine("Received: {0}", resData);//display message once it has been received
-                        resData = null;
+                        Console.WriteLine("Received: {0}", responseData);//display message once it has been received
+                        responseData = null;
                     }
                     
                 }
