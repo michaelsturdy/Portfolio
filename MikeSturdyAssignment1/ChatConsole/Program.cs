@@ -16,99 +16,92 @@ namespace ChatConsole
         
         static void Main(string[] args)
         {
-            string resData = null;
-            string text = null;
+            string resData = null;// variable for received data
+            string text = null;//input variable for sending
+            bool connected; // variable to see if there is a connection
+            Parent client;//variable to hold server or client object
 
             if (args.Length > 0 && args[0] == "-server")
             {
-                Server server = new Server();
+                client = new Server();
                 Console.WriteLine("Waiting for a connection...");
-                server.Connect();
-                Console.WriteLine("Connected!");
-                server.Stream();
-
-                while (true)
+                connected = client.Connect();
+                if (connected)//if a connection is established open the stream
                 {
-                    resData = server.Recieve();
-                    if (Console.KeyAvailable)
-                    {
-                        ConsoleKeyInfo keyinfo = Console.ReadKey(true);
-                        if (keyinfo.Key == ConsoleKey.I)
-                        {
-                            Console.WriteLine(">>");
-                            text = Console.ReadLine();
-                            if (text == "quit")
-                            {
-                                Console.WriteLine("Good Bye");
-                                Environment.Exit(0);
-                            }
-                            server.Send(text);
-                        }
-
-                        else
-                        {
-                            Console.WriteLine("you didnt press i ");
-                        }
-                    }
-                    if (resData != null)
-                    {
-                        Console.WriteLine("Received: {0}", resData);
-                        resData = null;
-                    }
-
-                }
-
-                Console.Read();
-            }
-
-            else
-            {
-                Client client = new Client();
-               bool connected = client.Connect();
-                if (connected)
-                {
+                    Console.WriteLine("Connected");
                     client.Stream();
                 }
                 else
                 {
-                    Console.WriteLine("unable to connect to the server");
+                    Console.WriteLine("Unable to establish a connection");
                 }
 
-                while (true)
+
+
+            }
+
+            else
+            {
+               client = new Client();
+               connected = client.Connect();
+                if (connected)
                 {
-                    resData = client.Recieve();
+                    Console.WriteLine("Connected");
+                    client.Stream();
+                }
+                else
+                {
+                    Console.WriteLine("Unable to connect to the server");
+                    Console.Read();
+                    Environment.Exit(0);
+                }
+                             
+            }//end else
+            Console.WriteLine("Press I to enter input mode and enter to send");
+            Console.WriteLine("Type quit as a message to exit");
+            while (true)//listening loop
+                {
+                   resData = client.Recieve();
+              
                     if (Console.KeyAvailable)
                     {
                         ConsoleKeyInfo keyinfo = Console.ReadKey(true);
                         if (keyinfo.Key == ConsoleKey.I)
                         {
-                            Console.WriteLine(">>");
+                            Console.Write(">>");
                             text = Console.ReadLine();
                             if (text == "quit")
                             {
                                 Console.WriteLine("Good Bye");
                                 Environment.Exit(0);
                             }
-                            client.Send(text);
+                        try
+                        {
+                            client.Send(text);//send the message
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("Connection Lost");
+                            Console.WriteLine(e);
+                            Console.Read();
+                            Environment.Exit(0);
+                        }
+                            
                         }
 
                         else
                         {
-                            Console.WriteLine("you didnt press i ");
+                            Console.WriteLine("Press I to send a message");
                         }
                     }
                     if (resData != null)
                     { 
-                        Console.WriteLine("Received: {0}", resData);
+                        Console.WriteLine("Received: {0}", resData);//display message once it has been received
                         resData = null;
                     }
                     
                 }
-                             
-            }
-
-
-            Console.Read();
+            
         }
     }
 }
