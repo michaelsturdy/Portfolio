@@ -5,6 +5,7 @@ using ChatLib2;
 
 //https://msdn.microsoft.com/en-us/library/system.net.sockets.tcplistener(v=vs.110).aspx
 
+
 namespace ChatConsole
 {
     class Program
@@ -12,10 +13,10 @@ namespace ChatConsole
         
         static void Main(string[] args)
         {
-            string responseData = null;// variable for received data
-            string text = null;//input variable for sending
-            bool connected; // variable to see if there is a connection
-            Parent client;//variable to hold server or client object
+            string responseData = null;// Variable for received data
+            string text = null;//Input variable for sending
+            bool connected; // Variable to see if there is a connection
+            Parent client;//Variable to hold server or client object
 
             if (args.Length > 0 && args[0] == "-server")
             {
@@ -55,7 +56,7 @@ namespace ChatConsole
             }
             Console.WriteLine("Press I to enter input mode and enter to send");
             Console.WriteLine("Type quit as a message to exit");
-            while (true)//listening loop
+            while (true)//Listening loop
                 {
                    responseData = client.Recieve();
               
@@ -71,7 +72,7 @@ namespace ChatConsole
                             text = "The other person has left the session";
                                 try
                                 {
-                                    client.Send(text);//inform the other user you have disconnected
+                                    client.Send(text);//Informs the other user you have disconnected
                                 }
                                 catch (Exception e)
                                 {
@@ -82,7 +83,7 @@ namespace ChatConsole
                             }
                         try
                         {
-                            client.Send(text);//send the message
+                            client.Send(text);//Send the message
                         }
                         catch(Exception e)
                         {
@@ -100,7 +101,7 @@ namespace ChatConsole
                     }
                     if (responseData != null)
                     { 
-                        Console.WriteLine("Received: {0}", responseData);//display message once it has been received
+                        Console.WriteLine("Received: {0}", responseData);//Display the message once it has been received
                         responseData = null;
                     }
                     

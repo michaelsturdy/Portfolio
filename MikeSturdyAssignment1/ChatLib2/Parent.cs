@@ -7,11 +7,11 @@ namespace ChatLib2
     public abstract class Parent
     {
 
-        public TcpClient client;
-        public NetworkStream stream;
-        Byte[] data = new Byte[256];
+        public TcpClient client;//Variable to hold the TcpClient object
+        public NetworkStream stream;//Variable to hold the NetworkStream object
+        Byte[] data = new Byte[256];//Byte array to send or receive from the stream
         /// <summary>
-        /// abstract connect method for client and server
+        /// Abstract connect method for client and server
         /// </summary>
         /// <returns>true if connection established</returns>
         public abstract bool Connect();
@@ -33,13 +33,13 @@ namespace ChatLib2
             stream.Write(data, 0, data.Length);
         }
         /// <summary>
-        /// listens for incoming data 
+        /// Listens for incoming data from the stream
         /// </summary>
-        /// <returns>data received as string</returns>
+        /// <returns>Data received as a string</returns>
         public string Recieve()
         {
             data = new Byte[256];
-            String responseData = String.Empty;//empty string to hold the response
+            String responseData = String.Empty;//Empty string to hold the response Data
 
            
             if (stream.DataAvailable)
@@ -52,8 +52,5 @@ namespace ChatLib2
             return null;
 
         }
-
-
-
     }//end class
 }

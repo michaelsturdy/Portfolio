@@ -8,9 +8,9 @@ namespace ChatLib2
     public class Server : Parent
     {
         /// <summary>
-        /// starts listening for a connection from a client 
+        /// Starts listening for a connection from a client 
         /// </summary>
-        /// <returns>true when a connection is made</returns>
+        /// <returns>True when a connection is made</returns>
         public override bool Connect()
         {
 
