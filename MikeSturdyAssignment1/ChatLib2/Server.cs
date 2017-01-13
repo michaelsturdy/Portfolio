@@ -21,7 +21,7 @@ namespace ChatLib2
 
             while (true)
             {
-                client = listener.AcceptTcpClient();
+                Client = listener.AcceptTcpClient();
                 return true;
             }
 

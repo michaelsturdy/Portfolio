@@ -26,7 +26,7 @@ namespace ChatConsole
                 if (connected)
                 {
                     Console.WriteLine("Connected");
-                    client.Stream();
+                    client.OpenStream();
                 }
                 else
                 {
@@ -44,7 +44,7 @@ namespace ChatConsole
                 if (connected)
                 {
                     Console.WriteLine("Connected");
-                    client.Stream();
+                    client.OpenStream();
                 }
                 else
                 {

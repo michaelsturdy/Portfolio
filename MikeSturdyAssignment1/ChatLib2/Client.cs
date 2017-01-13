@@ -18,7 +18,7 @@ namespace ChatLib2
             string ip = "127.0.0.1";
             try
             {
-                client = new TcpClient(ip, port);
+                Client = new TcpClient(ip, port);
                 return true;
             }
             catch (Exception e)

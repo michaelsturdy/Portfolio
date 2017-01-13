@@ -7,9 +7,9 @@ namespace ChatLib2
     public abstract class Parent
     {
 
-        public TcpClient client;//Variable to hold the TcpClient object
-        public NetworkStream stream;//Variable to hold the NetworkStream object
-        Byte[] data = new Byte[256];//Byte array to send or receive from the stream
+        public TcpClient Client;//Property to hold the TcpClient object
+        public NetworkStream Stream;//Property to hold the NetworkStream object
+        Byte[] Data = new Byte[256];//Byte array property to send or receive data from the stream
         /// <summary>
         /// Abstract connect method for client and server
         /// </summary>
@@ -18,9 +18,9 @@ namespace ChatLib2
        /// <summary>
        /// Opens the stream
        /// </summary>
-        public void Stream()
+        public void OpenStream()
         {
-            stream = client.GetStream();
+            Stream = Client.GetStream();
         }
         /// <summary>
         /// Sends data through the stream
@@ -28,9 +28,9 @@ namespace ChatLib2
         /// <param name="message">Message to be sent</param>
         public void Send(string message)
         {
-            data = System.Text.Encoding.ASCII.GetBytes(message);
+            Data = System.Text.Encoding.ASCII.GetBytes(message);
 
-            stream.Write(data, 0, data.Length);
+            Stream.Write(Data, 0, Data.Length);
         }
         /// <summary>
         /// Listens for incoming data from the stream
@@ -38,14 +38,14 @@ namespace ChatLib2
         /// <returns>Data received as a string</returns>
         public string Recieve()
         {
-            data = new Byte[256];
+            Data = new Byte[256];
             String responseData = String.Empty;//Empty string to hold the response Data
 
            
-            if (stream.DataAvailable)
+            if (Stream.DataAvailable)
             {
-                Int32 bytes = stream.Read(data, 0, data.Length);
-                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                Int32 bytes = Stream.Read(Data, 0, Data.Length);
+                responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
 
                 return responseData;
             }
