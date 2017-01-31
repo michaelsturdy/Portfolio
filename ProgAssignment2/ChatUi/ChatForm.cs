@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace ChatUi
 {
     public partial class ChatForm : Form
     {
+        Client client = new Client();
         public ChatForm()
         {
+            client.MessageReceived += new MessageReceivedEventHandler(Client_MessageReceived);
             InitializeComponent();
+        }
+
+        public void Client_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            ConversationTextBox.AppendText("\n" + e.Message);
         }
 
         private void SendButton_Click(object sender, EventArgs e)

@@ -9,6 +9,8 @@ namespace ChatLib
 {
     public class Client
     {
+        public event MessageReceivedEventHandler MessageReceived;
+
         public TcpClient client;//Property to hold the TcpClient object
         public NetworkStream Stream;//Property to hold the NetworkStream object
         Byte[] Data = new Byte[256];//Byte array property to send or receive data from the stream
@@ -68,6 +70,7 @@ namespace ChatLib
                 Int32 bytes = Stream.Read(Data, 0, Data.Length);
                 responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
 
+                MessageReceived(this, new MessageReceivedEventArgs(responseData));
                 return responseData;
             }
             return null;
