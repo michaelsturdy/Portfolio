@@ -14,6 +14,7 @@ namespace TaskExecuterUI
 {
     public partial class TasksForm : Form
     {
+        Thread workerThread;
         Executor executor = new Executor();
         public TasksForm()
         {
@@ -33,7 +34,7 @@ namespace TaskExecuterUI
                         StartButton.Enabled = true;
                     }
                 });
-                TasksProgressBar.Invoke(invoker);
+                TasksProgressBar.BeginInvoke(invoker);
 
             }
             else
@@ -51,11 +52,33 @@ namespace TaskExecuterUI
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            executor.StopExecution = false;
             StartButton.Enabled = false;
-            Thread workerThread = new Thread(executor.DoSomething);
+            cancelButton.Enabled = true;
+            workerThread = new Thread(executor.DoSomething);
             workerThread.Name = "MyWorkerThread";
             workerThread.Start();
+
             
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            //cancel the worker thread
+            //workerThread.Abort(); don't use!!
+            executor.StopExecution = true;
+            StartButton.Enabled = true;
+            cancelButton.Enabled = false;
+            
+        }
+
+        private void TasksForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (workerThread != null && workerThread.IsAlive)
+            {
+                executor.StopExecution = true;
+                workerThread.Join();
+            }
         }
     }
 }

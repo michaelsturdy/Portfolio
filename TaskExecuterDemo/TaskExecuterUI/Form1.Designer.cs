@@ -30,6 +30,7 @@
         {
             this.TasksProgressBar = new System.Windows.Forms.ProgressBar();
             this.StartButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TasksProgressBar
@@ -49,11 +50,23 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Enabled = false;
+            this.cancelButton.Location = new System.Drawing.Point(362, 259);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // TasksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 454);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.TasksProgressBar);
             this.Name = "TasksForm";
@@ -66,6 +79,7 @@
 
         private System.Windows.Forms.ProgressBar TasksProgressBar;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
 
