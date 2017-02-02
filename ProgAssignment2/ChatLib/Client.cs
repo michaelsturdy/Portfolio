@@ -10,7 +10,7 @@ namespace ChatLib
     public class Client
     {
         public event MessageReceivedEventHandler MessageReceived;
-
+        public bool isListening;
         public TcpClient client;//Property to hold the TcpClient object
         public NetworkStream Stream;//Property to hold the NetworkStream object
         Byte[] Data = new Byte[256];//Byte array property to send or receive data from the stream
@@ -36,6 +36,19 @@ namespace ChatLib
             }
 
         }
+        public bool Close()
+        {
+            try
+            {
+                isListening = false;
+                client.Close();
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
 
         public void OpenStream()
         {
@@ -49,9 +62,8 @@ namespace ChatLib
         /// <param name="message">Message to be sent</param>
         public void Send(string message)
         {
-            Data = System.Text.Encoding.ASCII.GetBytes(message);
-
-            Stream.Write(Data, 0, Data.Length);
+                Data = System.Text.Encoding.ASCII.GetBytes(message);
+                Stream.Write(Data, 0, Data.Length);
         }
 
 
@@ -59,22 +71,25 @@ namespace ChatLib
         /// Listens for incoming data from the stream
         /// </summary>
         /// <returns>Data received as a string</returns>
-        public string Receive()
+        public void Receive()
         {
-            Data = new Byte[256];
-            String responseData = String.Empty;//Empty string to hold the response Data
-
-
-            if (Stream.DataAvailable)
+            isListening = true;
+            while (isListening)
             {
-                Int32 bytes = Stream.Read(Data, 0, Data.Length);
-                responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
+                Data = new Byte[256];
+                String responseData = String.Empty;//Empty string to hold the response Data
 
-                MessageReceived(this, new MessageReceivedEventArgs(responseData));
-                return responseData;
+
+                if (Stream.DataAvailable)
+                {
+                    Int32 bytes = Stream.Read(Data, 0, Data.Length);
+                    responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
+
+                    MessageReceived(this, new MessageReceivedEventArgs(responseData));
+
+                }
+
             }
-            return null;
-
         }
 
 
