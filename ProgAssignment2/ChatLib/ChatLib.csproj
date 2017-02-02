@@ -45,6 +45,12 @@
     <Compile Include="MessageReceivedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogLib\LogLib.csproj">
+      <Project>{981690f4-3ba2-4b6a-81af-b3a92c34039b}</Project>
+      <Name>LogLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

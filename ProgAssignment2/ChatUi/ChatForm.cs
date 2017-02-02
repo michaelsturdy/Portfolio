@@ -1,5 +1,5 @@
 ﻿using ChatLib;
-using LogLib;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ namespace ChatUi
 {
     public partial class ChatForm : Form
     {
-        Log log = new Log();
+       
         Client client = new Client();
         Thread listeningThread;
         bool connected = false;
@@ -31,7 +31,6 @@ namespace ChatUi
             {
                 //lets threads talk to each other
                 MethodInvoker invoker = new MethodInvoker(delegate () {
-                    log.LogMessage("server: "+e.Message);
                     ConversationTextBox.AppendText("\r\nReceived: " + e.Message);
 
                 });
@@ -53,14 +52,16 @@ namespace ChatUi
             {
                 try
                 {
-                    log.LogMessage("client: " + MessageTextBox.Text);
-                    ConversationTextBox.AppendText("\r\n" + MessageTextBox.Text);
                     client.Send(MessageTextBox.Text);
+                    ConversationTextBox.AppendText("\r\n" + MessageTextBox.Text);
                     MessageTextBox.Text = "";
                 }
                 catch(Exception ex)
                 {
+                    connected = client.Close();
                     DisplayErrorMessage("Connection lost");
+                    connectToolStripMenuItem.Enabled = true;
+                    disconnectToolStripMenuItem.Enabled = false;
                 }
             }
             else
@@ -80,6 +81,8 @@ namespace ChatUi
             if (!connected)
             {
                 connected = client.Connect();
+                connectToolStripMenuItem.Enabled = false;
+                disconnectToolStripMenuItem.Enabled = true;
             }
             else
             {
@@ -90,7 +93,7 @@ namespace ChatUi
                 client.OpenStream();
                 listeningThread = new Thread(client.Receive);
                 listeningThread.Start();
-                ConversationTextBox.Text="Connected";
+                ConversationTextBox.Text = "Connected";
             }
             else
             {
@@ -113,6 +116,8 @@ namespace ChatUi
                 //TODO close the listening thread before terminating the connection
                 connected = client.Close();
                 ConversationTextBox.Text = "Connection terminated";
+                connectToolStripMenuItem.Enabled = true;
+                disconnectToolStripMenuItem.Enabled = false;
             }
             else
             {

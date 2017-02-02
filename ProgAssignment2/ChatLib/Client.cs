@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using LogLib;
 
 namespace ChatLib
 {
     public class Client
     {
+        Log log = new Log();
         public event MessageReceivedEventHandler MessageReceived;
         public bool isListening;
         public TcpClient client;//Property to hold the TcpClient object
@@ -62,7 +64,8 @@ namespace ChatLib
         /// <param name="message">Message to be sent</param>
         public void Send(string message)
         {
-                Data = System.Text.Encoding.ASCII.GetBytes(message);
+            log.LogMessage("Client: " + message);
+            Data = System.Text.Encoding.ASCII.GetBytes(message);
                 Stream.Write(Data, 0, Data.Length);
         }
 
@@ -84,7 +87,7 @@ namespace ChatLib
                 {
                     Int32 bytes = Stream.Read(Data, 0, Data.Length);
                     responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
-
+                    log.LogMessage("Server: " + responseData);
                     MessageReceived(this, new MessageReceivedEventArgs(responseData));
 
                 }
