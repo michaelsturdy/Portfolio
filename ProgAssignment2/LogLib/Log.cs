@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace LogLib
 {
+    /// <summary>
+    /// Used for writing to a log file.
+    /// </summary>
     public class Log
     {
         /// <summary>

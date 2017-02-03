@@ -115,6 +115,7 @@ namespace ChatUi
             {
                 //TODO close the listening thread before terminating the connection
                 connected = client.Close();
+                listeningThread.Join();
                 ConversationTextBox.Text = "Connection terminated";
                 connectToolStripMenuItem.Enabled = true;
                 disconnectToolStripMenuItem.Enabled = false;
@@ -130,6 +131,7 @@ namespace ChatUi
             if (connected)
             {
                 connected = client.Close();
+                listeningThread.Join();
             }
             Environment.Exit(0);
         }
@@ -139,6 +141,7 @@ namespace ChatUi
             if (connected)
             {
                 connected = client.Close();
+                listeningThread.Join();
             }
         }
     }

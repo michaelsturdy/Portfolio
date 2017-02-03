@@ -8,21 +8,25 @@ using LogLib;
 
 namespace ChatLib
 {
+    /// <summary>
+    /// Chat client
+    /// </summary>
     public class Client
     {
-        Log log = new Log();
-        public event MessageReceivedEventHandler MessageReceived;
-        public bool isListening;
-        public TcpClient client;//Property to hold the TcpClient object
-        public NetworkStream Stream;//Property to hold the NetworkStream object
-        Byte[] Data = new Byte[256];//Byte array property to send or receive data from the stream
+        
+        public event MessageReceivedEventHandler MessageReceived;   // event handler for received messages
+        bool isListening;                                           //Property to check if the listening loop is on
+        TcpClient client;                                           //Property to hold the TcpClient object
+        NetworkStream Stream;                                       //Property to hold the NetworkStream object
+        Byte[] Data = new Byte[256];                                //Byte array property to send or receive data from the stream
+        Log log = new Log();                                        //logging object used to write to the log
 
 
 
         /// <summary>
         /// Connects a client to a server
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if a connect was established</returns>
         public bool Connect()
         {
             Int32 port = 13000;
@@ -72,8 +76,7 @@ namespace ChatLib
 
         /// <summary>
         /// Listens for incoming data from the stream
-        /// </summary>
-        /// <returns>Data received as a string</returns>
+        /// </summary
         public void Receive()
         {
             isListening = true;
