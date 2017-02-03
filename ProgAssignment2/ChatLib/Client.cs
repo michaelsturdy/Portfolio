@@ -57,10 +57,12 @@ namespace ChatLib
             }
             catch
             {
-                return true;
+                return true; 
             }
         }
-
+        /// <summary>
+        /// opens the stream
+        /// </summary>
         public void OpenStream()
         {
             Stream = client.GetStream();

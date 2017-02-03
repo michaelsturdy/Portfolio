@@ -81,8 +81,7 @@ namespace ChatUi
             if (!connected)
             {
                 connected = client.Connect();
-                connectToolStripMenuItem.Enabled = false;
-                disconnectToolStripMenuItem.Enabled = true;
+                
             }
             else
             {
@@ -94,6 +93,8 @@ namespace ChatUi
                 listeningThread = new Thread(client.Receive);
                 listeningThread.Start();
                 ConversationTextBox.Text = "Connected";
+                connectToolStripMenuItem.Enabled = false;
+                disconnectToolStripMenuItem.Enabled = true;
             }
             else
             {
