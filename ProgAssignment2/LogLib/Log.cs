@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,16 @@ namespace LogLib
         /// <param name="Message">message to write to the log</param>
         public void LogMessage(string Message)
         {
-            using (StreamWriter sw = new StreamWriter("C:/Users/NSCC Student/Desktop/Logs.txt",true))
+            string path;
+            if (ConfigurationManager.AppSettings["LogPath"].Equals(""))
+            {
+                path = "logs.txt";
+            }
+            else
+            {
+                path = ConfigurationManager.AppSettings["LogPath"];
+            }
+            using (StreamWriter sw = new StreamWriter(path,true))
             {
                 sw.WriteLine(Message);
             }
