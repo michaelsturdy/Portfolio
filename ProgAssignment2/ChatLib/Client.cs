@@ -42,6 +42,11 @@ namespace ChatLib
             }
 
         }
+
+        /// <summary>
+        /// Closes the tcpClient connection to the listener
+        /// </summary>
+        /// <returns>False if connection closed</returns>
         public bool Close()
         {
             try
@@ -63,19 +68,19 @@ namespace ChatLib
 
 
         /// <summary>
-        /// Sends data through the stream
+        /// Sends data through the stream and logs it
         /// </summary>
         /// <param name="message">Message to be sent</param>
         public void Send(string message)
         {
-            log.LogMessage("Client: " + message);
+            log.LogMessage(DateTime.Now + " Client: " + message);
             Data = System.Text.Encoding.ASCII.GetBytes(message);
                 Stream.Write(Data, 0, Data.Length);
         }
 
 
         /// <summary>
-        /// Listens for incoming data from the stream
+        /// Listens for incoming data from the stream. sends it to a messageRecived event and logs it
         /// </summary
         public void Receive()
         {
@@ -90,7 +95,7 @@ namespace ChatLib
                 {
                     Int32 bytes = Stream.Read(Data, 0, Data.Length);
                     responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
-                    log.LogMessage("Server: " + responseData);
+                    log.LogMessage(DateTime.Now + " Server: " + responseData);
                     MessageReceived(this, new MessageReceivedEventArgs(responseData));
 
                 }
