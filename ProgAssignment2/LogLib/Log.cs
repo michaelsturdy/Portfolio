@@ -19,15 +19,8 @@ namespace LogLib
         /// <param name="Message">message to write to the log</param>
         public void Log(string Message)
         {
-            string path;
-            if (ConfigurationManager.AppSettings["LogPath"].Equals(""))
-            {
-                path = "logs.txt";
-            }
-            else
-            {
-                path = ConfigurationManager.AppSettings["LogPath"];
-            }
+            string path = ConfigurationManager.AppSettings["LogPath"];
+            
             using (StreamWriter sw = new StreamWriter(path,true))
             {
                 sw.WriteLine(Message);

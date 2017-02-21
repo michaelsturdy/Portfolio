@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Practices.Unity;
+using Ninject.Modules;
+using Ninject;
 
 namespace ChatUi
 {
@@ -18,7 +21,23 @@ namespace ChatUi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChatForm(new Client(new Logger())));//constructor injection
+            //Application.Run(new ChatForm(new Client(new Logger())));//constructor injection
+         //Unity IOC container
+
+            UnityContainer container = new UnityContainer();
+            //container.RegisterType<ILoggingService, Logger>(); // text file logger
+            container.RegisterType<ILoggingService, MikeSturdy_logger>(); // log4net console logger
+            Application.Run(container.Resolve<ChatForm>());//unity constructor injection
+
+
+
+
+         //ninject IOC
+            //StandardKernel kernel = new StandardKernel();
+            //kernel.Bind<ILoggingService>().To<Logger>();
+            //Application.Run(kernel.Get<ChatForm>());
+
+
         }
     }
 }
