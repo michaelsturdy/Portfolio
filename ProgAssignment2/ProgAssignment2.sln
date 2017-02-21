@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatLib", "ChatLib\ChatLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogLib", "LogLib\LogLib.csproj", "{981690F4-3BA2-4B6A-81AF-B3A92C34039B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerLibrary", "..\..\..\..\Desktop\LoggerLibrary\LoggerLibrary.csproj", "{A5C56F56-7661-455F-A6CC-E816FF5916FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{981690F4-3BA2-4B6A-81AF-B3A92C34039B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{981690F4-3BA2-4B6A-81AF-B3A92C34039B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{981690F4-3BA2-4B6A-81AF-B3A92C34039B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C56F56-7661-455F-A6CC-E816FF5916FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C56F56-7661-455F-A6CC-E816FF5916FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C56F56-7661-455F-A6CC-E816FF5916FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C56F56-7661-455F-A6CC-E816FF5916FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

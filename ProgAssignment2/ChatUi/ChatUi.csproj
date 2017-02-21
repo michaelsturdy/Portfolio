@@ -102,6 +102,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Desktop\LoggerLibrary\LoggerLibrary.csproj">
+      <Project>{A5C56F56-7661-455F-A6CC-E816FF5916FC}</Project>
+      <Name>LoggerLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChatLib\ChatLib.csproj">
       <Project>{40E6C4EE-D151-4A2E-AD13-16885A44D8AE}</Project>
       <Name>ChatLib</Name>

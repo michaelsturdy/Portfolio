@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Microsoft.Practices.Unity;
 using Ninject.Modules;
 using Ninject;
+using LoggerLibrary;
 
 namespace ChatUi
 {
@@ -22,22 +23,26 @@ namespace ChatUi
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new ChatForm(new Client(new Logger())));//constructor injection
-         //Unity IOC container
+            //Unity IOC container
 
-            UnityContainer container = new UnityContainer();
+            //UnityContainer container = new UnityContainer();
             //container.RegisterType<ILoggingService, Logger>(); // text file logger
-            container.RegisterType<ILoggingService, MikeSturdy_logger>(); // log4net console logger
-            Application.Run(container.Resolve<ChatForm>());//unity constructor injection
+            //container.RegisterType<ILoggingService, MikeSturdy_logger>(); // log4net console logger
+            //Application.Run(container.Resolve<ChatForm>());//unity constructor injection
 
 
 
 
-         //ninject IOC
+            //ninject IOC
             //StandardKernel kernel = new StandardKernel();
             //kernel.Bind<ILoggingService>().To<Logger>();
             //Application.Run(kernel.Get<ChatForm>());
 
+            //nicks logger nlog
 
+            UnityContainer container = new UnityContainer();
+            container.RegisterType<LoggerLibrary.ILoggingService, NickBourque_Logger>(); // log4net console logger
+            Application.Run(container.Resolve<ChatForm>());//unity constructor injection
         }
     }
 }

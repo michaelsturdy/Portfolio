@@ -19,9 +19,9 @@ namespace ChatLib
         TcpClient client;                                           //Property to hold the TcpClient object
         NetworkStream Stream;                                       //Property to hold the NetworkStream object
         Byte[] Data = new Byte[256];                                //Byte array property to send or receive data from the stream
-        ILoggingService log;// = new Logger();                                        //logging object used to write to the log
+        LoggerLibrary.ILoggingService log;// = new Logger();                                        //logging object used to write to the log
 
-        public Client(ILoggingService log)
+        public Client(LoggerLibrary.ILoggingService log)
         {
             this.log = log;
         }
