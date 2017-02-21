@@ -15,12 +15,13 @@ namespace ChatUi
 {
     public partial class ChatForm : Form
     {
-       
-        Client client = new Client();
+
+        Client client;// = new Client();
         Thread listeningThread;
         bool connected = false;
-        public ChatForm()
+        public ChatForm(Client client)
         {
+            this.client = client;
             client.MessageReceived += new MessageReceivedEventHandler(Client_MessageReceived);
             InitializeComponent();
         }

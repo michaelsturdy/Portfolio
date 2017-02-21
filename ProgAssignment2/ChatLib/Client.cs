@@ -19,9 +19,12 @@ namespace ChatLib
         TcpClient client;                                           //Property to hold the TcpClient object
         NetworkStream Stream;                                       //Property to hold the NetworkStream object
         Byte[] Data = new Byte[256];                                //Byte array property to send or receive data from the stream
-        Log log = new Log();                                        //logging object used to write to the log
+        ILoggingService log;// = new Logger();                                        //logging object used to write to the log
 
-
+        public Client(ILoggingService log)
+        {
+            this.log = log;
+        }
 
         /// <summary>
         /// Connects a client to a server
@@ -75,7 +78,7 @@ namespace ChatLib
         /// <param name="message">Message to be sent</param>
         public void Send(string message)
         {
-            log.LogMessage(DateTime.Now + " Client: " + message);
+            log.Log(DateTime.Now + " Client: " + message);
             Data = System.Text.Encoding.ASCII.GetBytes(message);
                 Stream.Write(Data, 0, Data.Length);
         }
@@ -97,7 +100,7 @@ namespace ChatLib
                 {
                     Int32 bytes = Stream.Read(Data, 0, Data.Length);
                     responseData = System.Text.Encoding.ASCII.GetString(Data, 0, bytes);
-                    log.LogMessage(DateTime.Now + " Server: " + responseData);
+                    log.Log(DateTime.Now + " Server: " + responseData);
                     MessageReceived(this, new MessageReceivedEventArgs(responseData));
 
                 }

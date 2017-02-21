@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LogLib;
+using ChatLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace ChatUi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChatForm());
+            Application.Run(new ChatForm(new Client(new Logger())));//constructor injection
         }
     }
 }

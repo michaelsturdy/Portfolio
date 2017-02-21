@@ -11,13 +11,13 @@ namespace LogLib
     /// <summary>
     /// Used for writing to a log file.
     /// </summary>
-    public class Log
+    public class Logger : ILoggingService
     {
         /// <summary>
         /// Writes to the log file
         /// </summary>
         /// <param name="Message">message to write to the log</param>
-        public void LogMessage(string Message)
+        public void Log(string Message)
         {
             string path;
             if (ConfigurationManager.AppSettings["LogPath"].Equals(""))
