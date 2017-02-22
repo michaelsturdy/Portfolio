@@ -1,4 +1,4 @@
-﻿using LogLib;
+﻿//using LogLib;
 using ChatLib;
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,7 @@ namespace ChatUi
             //nicks logger nlog
 
             UnityContainer container = new UnityContainer();
-            container.RegisterType<LoggerLibrary.ILoggingService, NickBourque_Logger>(); // log4net console logger
+            container.RegisterType<ILoggingService, NickBourque_Logger>(); // log4net console logger
             Application.Run(container.Resolve<ChatForm>());//unity constructor injection
         }
     }

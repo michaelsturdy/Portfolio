@@ -4,7 +4,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using LogLib;
+//using LogLib;
+using LoggerLibrary;
 
 namespace ChatLib
 {
@@ -19,9 +20,9 @@ namespace ChatLib
         TcpClient client;                                           //Property to hold the TcpClient object
         NetworkStream Stream;                                       //Property to hold the NetworkStream object
         Byte[] Data = new Byte[256];                                //Byte array property to send or receive data from the stream
-        LoggerLibrary.ILoggingService log;// = new Logger();                                        //logging object used to write to the log
+        ILoggingService log;// = new Logger();                                        //logging object used to write to the log
 
-        public Client(LoggerLibrary.ILoggingService log)
+        public Client(ILoggingService log)
         {
             this.log = log;
         }
