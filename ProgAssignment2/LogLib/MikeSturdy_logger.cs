@@ -20,7 +20,7 @@ namespace LogLib
         public MikeSturdy_logger()
         {
             logger = LogManager.GetLogger(typeof(MikeSturdy_logger));
-            BasicConfigurator.Configure();
+            XmlConfigurator.Configure();
         }
         /// <summary>
         /// Logs a message
@@ -28,7 +28,7 @@ namespace LogLib
         /// <param name="message">Message to be logged</param>
         public void Log(string message)
         {
-            logger.Debug(message);
+            logger.Fatal(message);
         }
     }
 }

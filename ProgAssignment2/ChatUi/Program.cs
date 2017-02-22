@@ -1,5 +1,4 @@
-﻿//using LogLib;
-using ChatLib;
+﻿using ChatLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +8,7 @@ using Microsoft.Practices.Unity;
 using Ninject.Modules;
 using Ninject;
 using LoggerLibrary;
+//using LogLib;
 
 namespace ChatUi
 {
@@ -23,6 +23,7 @@ namespace ChatUi
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new ChatForm(new Client(new Logger())));//constructor injection
+
             //Unity IOC container
 
             //UnityContainer container = new UnityContainer();
@@ -38,11 +39,11 @@ namespace ChatUi
             //kernel.Bind<ILoggingService>().To<Logger>();
             //Application.Run(kernel.Get<ChatForm>());
 
-            //nicks logger nlog
+            //nicks logger using nlog
 
             UnityContainer container = new UnityContainer();
-            container.RegisterType<ILoggingService, NickBourque_Logger>(); // log4net console logger
-            Application.Run(container.Resolve<ChatForm>());//unity constructor injection
+            container.RegisterType<ILoggingService, NickBourque_Logger>(); 
+            Application.Run(container.Resolve<ChatForm>());
         }
     }
 }
