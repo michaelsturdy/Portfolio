@@ -42,7 +42,7 @@ namespace ChatUi
             //nicks logger using nlog
 
             UnityContainer container = new UnityContainer();
-            container.RegisterType<ILoggingService, NickBourque_Logger>(); 
+            container.RegisterType<ILoggingService, NickBourque_Logger>();
             Application.Run(container.Resolve<ChatForm>());
         }
     }
