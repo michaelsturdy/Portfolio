@@ -9,11 +9,11 @@ namespace BouncyBallDemo
 {
     public class Paddle
     {
-        private readonly int paddleHeight = 10;
-        private readonly int paddleWidth = 70;
+        private readonly int paddleHeight = 20;
+        private readonly int paddleWidth = 20;
         private Rectangle paddleDisplayArea;
         private Rectangle gameArea;
-        public enum Direction {Left, Right }
+        public enum Direction {Left, Right, Up, Down }
 
 
         public Paddle(Rectangle gameArea)
@@ -36,6 +36,10 @@ namespace BouncyBallDemo
             }
         }
 
+        public Rectangle DisplayArea
+        {
+            get { return paddleDisplayArea; }
+        }
         public void Move(Direction direction)
         {
             switch (direction)
@@ -43,15 +47,25 @@ namespace BouncyBallDemo
                 case Direction.Left:
                     {
                         paddleDisplayArea.X = (paddleDisplayArea.X >= 20) ? paddleDisplayArea.X - 20 : 0;
-                        
-                            break;
-                        
+                        break;
                     }
                 case Direction.Right:
                     {
                         paddleDisplayArea.X = (paddleDisplayArea.X < gameArea.Right-paddleWidth) ? paddleDisplayArea.X + 20 : gameArea.Right - paddleWidth;
                         break;
                     }
+                    
+                case Direction.Up:
+                    {
+                        paddleDisplayArea.Y = (paddleDisplayArea.Y >= 20) ? paddleDisplayArea.Y - 20 : 0;
+                        break;
+                    }
+                case Direction.Down:
+                    {
+                        paddleDisplayArea.Y = (paddleDisplayArea.Y < gameArea.Height - paddleHeight) ? paddleDisplayArea.Y + 20 : gameArea.Height - paddleHeight;
+                        break;
+                    }
+
             }
         }
 

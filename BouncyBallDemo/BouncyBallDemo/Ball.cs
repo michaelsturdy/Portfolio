@@ -33,21 +33,11 @@ namespace BouncyBallDemo
 
         public void Move()
         {
+
+           
+            
             ballArea.X += XVelocity;
             ballArea.Y += YVelocity;
-
-            if (ballArea.X <= 0)
-            {
-                XVelocity = XVelocity * -1;
-            }
-            if (ballArea.X >= gameArea.Width)
-            {
-                XVelocity = XVelocity * -1;
-            }
-            if (ballArea.Y >= 0)
-            {
-                YVelocity = YVelocity * -1;
-            }
         }
 
         public void Draw(Graphics graphics)
@@ -56,6 +46,15 @@ namespace BouncyBallDemo
             {
                 graphics.FillEllipse(brush, ballArea);
             }
+        }
+        public Rectangle ballDisplayArea
+        {
+            get { return this.ballArea; }
+        }
+
+        public int Size
+        {
+            get { return this.size; }
         }
     }
 }
