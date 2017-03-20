@@ -43,6 +43,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.DoubleBuffered = true;
             this.Name = "GameForm";
             this.Text = "BouncyBallGame";
             this.Load += new System.EventHandler(this.GameForm_Load);

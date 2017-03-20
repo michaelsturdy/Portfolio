@@ -22,20 +22,17 @@ namespace BouncyBallDemo
             ballArea.Height = size;
             ballArea.Width = size;
 
-            ballArea.X = gameArea.Width / 2 - size/2;
-            ballArea.Y = gameArea.Height / 2 - size/2;
-
             Random random = new Random();
+            ballArea.X = random.Next(0,gameArea.Width - size/2);
+            ballArea.Y = random.Next(0, gameArea.Height - size/2);
+
             XVelocity = random.Next(-10, 10);
             YVelocity= random.Next(-10, 10);
 
         }
 
         public void Move()
-        {
-
-           
-            
+        {           
             ballArea.X += XVelocity;
             ballArea.Y += YVelocity;
         }
