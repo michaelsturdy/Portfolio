@@ -23,8 +23,8 @@ namespace BouncyBallDemo
             ballArea.Width = size;
 
             Random random = new Random();
-            ballArea.X = random.Next(0,gameArea.Width - size/2);
-            ballArea.Y = random.Next(0, gameArea.Height - size/2);
+            ballArea.X = random.Next(5,gameArea.Width - size);
+            ballArea.Y = random.Next(5, gameArea.Height - size);
 
             XVelocity = random.Next(-10, 10);
             YVelocity= random.Next(-10, 10);
