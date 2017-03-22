@@ -15,8 +15,8 @@ namespace HungryHippo
     {
         bool paused = false;
         int maxMines = 5;
-        int ballsCollected = 0;
-        Pause pause;
+        int ballsCollected = -1;
+        TextDisplay text;
         Hippo hippo;
         HashSet<Ball> balls = new HashSet<Ball>();
         HashSet<Mine> mines = new HashSet<Mine>();
@@ -30,11 +30,16 @@ namespace HungryHippo
             this.WindowState = FormWindowState.Maximized;
             hippo = new Hippo(this.DisplayRectangle);
             balls.Add(new Ball(this.DisplayRectangle));
-            pause = new Pause(this.DisplayRectangle);
+            text = new TextDisplay();
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
+            if (ballsCollected == -1)
+            {
+                text.Draw(e.Graphics, "press space to start and pause" + "\n" + "avoid the mines" +"\n"+ "collect 20 balls to level up", DisplayRectangle.Width / 3, DisplayRectangle.Height / 3);
+            }
+            
             UpdateBallsCollected(e.Graphics);
             hippo.Draw(e.Graphics);
             foreach (Ball ball in balls)
@@ -47,7 +52,16 @@ namespace HungryHippo
             }
             if (paused)
             {
-                pause.Draw(e.Graphics);
+                text.Draw(e.Graphics,"PAUSED",DisplayRectangle.Width/2,DisplayRectangle.Height/2);
+            }
+            if (ballsCollected >= 5)//change 5 back to 20
+            {
+                ballsCollected = 0;
+                maxMines += 2;
+                AnimationTimer.Stop();
+                BallTimer.Stop();
+                text.Draw(e.Graphics, "Level Up Press Space For The Next level", DisplayRectangle.Width / 3, DisplayRectangle.Height / 2);
+
             }
         }
         private void UpdateBallsCollected(Graphics graphics)
@@ -64,13 +78,17 @@ namespace HungryHippo
         {
             if (e.KeyData == Keys.Space)
             {
+                if (ballsCollected == -1)
+                {
+                    ballsCollected = 0;
+                }
                 
                 if (AnimationTimer.Enabled)
                 {
                     paused = true;
                     AnimationTimer.Stop();
                     BallTimer.Stop();
-                    
+                    Invalidate();
                 }
                 else
                 {
@@ -81,7 +99,7 @@ namespace HungryHippo
 
                 }             
             }
-            Invalidate();
+            
 
             if (AnimationTimer.Enabled)
             {
@@ -200,6 +218,11 @@ namespace HungryHippo
         {
             if (mine.MineDisplayArea.IntersectsWith(hippo.DisplayArea))
             {
+                ballsCollected += -10;
+                if (ballsCollected < 0)
+                {
+                    ballsCollected = 0;
+                }
                 return true;
             }
             return false;

@@ -7,22 +7,15 @@ using System.Threading.Tasks;
 
 namespace HungryHippo
 {
-    class Pause
+    class TextDisplay
     {
-        string message = "PAUSED";
+
         Font font = new Font("comicSans", 24);
         SolidBrush brush = new SolidBrush(Color.Yellow);
-       
-        Rectangle gameArea;
 
-        public Pause(Rectangle gameArea)
+        public void Draw(Graphics graphics, string message, int xPoint, int yPoint)
         {
-            this.gameArea = gameArea;
-        }
-
-        public void Draw(Graphics graphics)
-        {
-            Point point = new Point(gameArea.Width/2, gameArea.Height/2);
+            Point point = new Point(xPoint, yPoint);
             graphics.DrawString(message, font, brush, point);
         }
     }

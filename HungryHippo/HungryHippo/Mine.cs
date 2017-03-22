@@ -23,8 +23,8 @@ namespace HungryHippo
             mineArea.Width = size;
 
             Random random = new Random();
-            mineArea.X = random.Next(5, gameArea.Width - size);
-            mineArea.Y = random.Next(5, gameArea.Height - size);
+            mineArea.X = 10;//random.Next(10, gameArea.Width - size);
+            mineArea.Y = 10;//random.Next(10, gameArea.Height - size);
 
             XVelocity = random.Next(-10, 10);
             YVelocity = random.Next(-10, 10);
