@@ -9,9 +9,10 @@ namespace HungryHippo
 {
     public class Ball
     {
+        Image ballImage = Image.FromFile(@"Images/Ball.png");
         private Rectangle ballArea;
         private Rectangle gameArea;
-        private int size = 10;
+        private int size = 20;
         public int XVelocity { get;set; }
         public int YVelocity { get; set; }
 
@@ -39,10 +40,7 @@ namespace HungryHippo
 
         public void Draw(Graphics graphics)
         {
-            using (SolidBrush brush = new SolidBrush(Color.Gray))
-            {
-                graphics.FillEllipse(brush, ballArea);
-            }
+            graphics.DrawImage(ballImage, ballDisplayArea);
         }
         public Rectangle ballDisplayArea
         {

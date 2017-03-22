@@ -9,8 +9,8 @@ namespace HungryHippo
 {
     public class Hippo
     {
-        private readonly int hippoHeight = 50;
-        private readonly int hippoWidth = 50;
+        private readonly int hippoHeight = 70;
+        private readonly int hippoWidth = 70;
         private Rectangle hippoDisplayArea;
         private Rectangle gameArea;
         Image hippoPic = Image.FromFile(@"Images/Hippo.png");
@@ -23,7 +23,7 @@ namespace HungryHippo
             hippoDisplayArea.Width = hippoWidth;
             hippoDisplayArea.Height = hippoHeight;
             hippoDisplayArea.X = gameArea.Width/2 - hippoWidth/2 ;
-            hippoDisplayArea.Y = gameArea.Bottom-50;
+            hippoDisplayArea.Y = gameArea.Bottom-70;
         }
 
         //move
@@ -31,10 +31,7 @@ namespace HungryHippo
         //draw
         public void Draw(Graphics graphics)
         {
-            //using (SolidBrush brush = new SolidBrush(Color.White))
-            {
-                //graphics.FillRectangle(brush, paddleDisplayArea);
-            }
+          
             graphics.DrawImage(hippoPic, hippoDisplayArea);
 
 

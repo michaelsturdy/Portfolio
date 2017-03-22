@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace HungryHippo
 {
     class Mine
     {
+        Image mineImage = Image.FromFile(@"Images/Mine.png");
         private Rectangle mineArea;
         private Rectangle gameArea;
-        private int size = 20;
+        private int size = 30;
         public int XVelocity { get; set; }
         public int YVelocity { get; set; }
 
@@ -23,8 +25,8 @@ namespace HungryHippo
             mineArea.Width = size;
 
             Random random = new Random();
-            mineArea.X = 10;//random.Next(10, gameArea.Width - size);
-            mineArea.Y = 10;//random.Next(10, gameArea.Height - size);
+            mineArea.X = 20;//random.Next(10, gameArea.Width - size);
+            mineArea.Y = 20;//random.Next(10, gameArea.Height - size);
 
             XVelocity = random.Next(-10, 10);
             YVelocity = random.Next(-10, 10);
@@ -39,10 +41,7 @@ namespace HungryHippo
 
         public void Draw(Graphics graphics)
         {
-            using (SolidBrush brush = new SolidBrush(Color.Red))
-            {
-                graphics.FillEllipse(brush, mineArea);
-            }
+            graphics.DrawImage(mineImage, MineDisplayArea);
         }
         public Rectangle MineDisplayArea
         {

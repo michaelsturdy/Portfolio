@@ -13,9 +13,11 @@ namespace HungryHippo
 {
     public partial class GameForm : Form
     {
+        bool gameStart = true;
         bool paused = false;
         int maxMines = 5;
-        int ballsCollected = -1;
+        int ballsCollected = 0;
+        int level = 1;
         TextDisplay text;
         Hippo hippo;
         HashSet<Ball> balls = new HashSet<Ball>();
@@ -35,11 +37,11 @@ namespace HungryHippo
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
-            if (ballsCollected == -1)
+            if (gameStart)
             {
                 text.Draw(e.Graphics, "press space to start and pause" + "\n" + "avoid the mines" +"\n"+ "collect 20 balls to level up", DisplayRectangle.Width / 3, DisplayRectangle.Height / 3);
             }
-            
+            text.Draw(e.Graphics, string.Format("Level: {0}", level) , DisplayRectangle.Width - 200, 20);
             UpdateBallsCollected(e.Graphics);
             hippo.Draw(e.Graphics);
             foreach (Ball ball in balls)
@@ -54,8 +56,9 @@ namespace HungryHippo
             {
                 text.Draw(e.Graphics,"PAUSED",DisplayRectangle.Width/2,DisplayRectangle.Height/2);
             }
-            if (ballsCollected >= 5)//change 5 back to 20
+            if (ballsCollected >= 20)//balls needed to level up
             {
+                level++;
                 ballsCollected = 0;
                 maxMines += 2;
                 AnimationTimer.Stop();
@@ -69,7 +72,7 @@ namespace HungryHippo
             string message = @"Balls Collected: {0}";
             Font font = new Font("comicSans", 16);
             SolidBrush brush = new SolidBrush(Color.Yellow);
-            Point point = new Point(20, 20);
+            Point point = new Point(DisplayRectangle.Width / 3, 20);
             graphics.DrawString(string.Format(message, ballsCollected),font,brush,point);
 
         }
@@ -78,9 +81,9 @@ namespace HungryHippo
         {
             if (e.KeyData == Keys.Space)
             {
-                if (ballsCollected == -1)
+                if (gameStart)
                 {
-                    ballsCollected = 0;
+                    gameStart = false;
                 }
                 
                 if (AnimationTimer.Enabled)
@@ -230,7 +233,7 @@ namespace HungryHippo
 
         private void BallTimer_Tick(object sender, EventArgs e)
         {
-            if (balls.Count < 30)
+            if (balls.Count < 20)
             {
                 balls.Add(new Ball(this.DisplayRectangle));
             }
