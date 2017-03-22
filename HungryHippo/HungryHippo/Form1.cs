@@ -13,8 +13,10 @@ namespace HungryHippo
 {
     public partial class GameForm : Form
     {
+        bool paused = false;
         int maxMines = 5;
         int ballsCollected = 0;
+        Pause pause;
         Hippo hippo;
         HashSet<Ball> balls = new HashSet<Ball>();
         HashSet<Mine> mines = new HashSet<Mine>();
@@ -27,7 +29,8 @@ namespace HungryHippo
         {
             this.WindowState = FormWindowState.Maximized;
             hippo = new Hippo(this.DisplayRectangle);
-            balls.Add(new Ball(this.DisplayRectangle));                    
+            balls.Add(new Ball(this.DisplayRectangle));
+            pause = new Pause(this.DisplayRectangle);
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -42,6 +45,10 @@ namespace HungryHippo
             {
                 mine.Draw(e.Graphics);
             }
+            if (paused)
+            {
+                pause.Draw(e.Graphics);
+            }
         }
         private void UpdateBallsCollected(Graphics graphics)
         {
@@ -55,47 +62,56 @@ namespace HungryHippo
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyData)
+            if (e.KeyData == Keys.Space)
             {
-                case Keys.Left:
-                    {
-                        hippo.Move(Hippo.Direction.Left);
-                        break;
-                    }
-                case Keys.Right:
-                    {
-                        hippo.Move(Hippo.Direction.Right);
-                        break;
-                    }
+                
+                if (AnimationTimer.Enabled)
+                {
+                    paused = true;
+                    AnimationTimer.Stop();
+                    BallTimer.Stop();
+                    
+                }
+                else
+                {
+                    paused = false;
+                    
+                    AnimationTimer.Start();
+                    BallTimer.Start();
 
-                case Keys.Up:
-                    {
-                        hippo.Move(Hippo.Direction.Up);
-                        break;
-                    }
-                case Keys.Down:
-                    {
-                        hippo.Move(Hippo.Direction.Down);
-                        break;
-                    }
-
-                case Keys.Space:
-                    {
-                        if (!AnimationTimer.Enabled)
-                        {
-                            AnimationTimer.Start();
-                            BallTimer.Start();
-                            //balls.Add(new Ball(this.DisplayRectangle));
-                            //timer1.Stop();
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
-                    }
+                }             
             }
-            
+            Invalidate();
+
+            if (AnimationTimer.Enabled)
+            {
+                switch (e.KeyData)
+                {
+                    case Keys.Left:
+                        {
+                            hippo.Move(Hippo.Direction.Left);
+                            break;
+                        }
+                    case Keys.Right:
+                        {
+                            hippo.Move(Hippo.Direction.Right);
+                            break;
+                        }
+
+                    case Keys.Up:
+                        {
+                            hippo.Move(Hippo.Direction.Up);
+                            break;
+                        }
+                    case Keys.Down:
+                        {
+                            hippo.Move(Hippo.Direction.Down);
+                            break;
+                        }
+
+                   
+                }
+            }
         }
 
         private void AnimationTimer_Tick(object sender, EventArgs e)
@@ -117,6 +133,7 @@ namespace HungryHippo
         private void CheckForCollision()
         {
             balls.RemoveWhere(BallHitsHippo);
+            mines.RemoveWhere(MineHitsHippo);
 
             foreach (Ball ball in balls)
             {
@@ -194,7 +211,7 @@ namespace HungryHippo
             {
                 balls.Add(new Ball(this.DisplayRectangle));
             }
-            if (mines.Count <= maxMines)
+            if (mines.Count < maxMines)
             {
                 mines.Add(new Mine(this.DisplayRectangle));
             }

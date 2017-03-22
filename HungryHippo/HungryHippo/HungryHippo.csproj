@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Hippo.cs" />
     <Compile Include="Mine.cs" />
+    <Compile Include="Pause.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
