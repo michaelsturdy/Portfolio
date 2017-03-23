@@ -39,7 +39,7 @@ namespace HungryHippo
         {
             if (gameStart)
             {
-                text.Draw(e.Graphics, "press space to start and pause" + "\n" + "avoid the mines" +"\n"+ "collect 20 balls to level up", DisplayRectangle.Width / 3, DisplayRectangle.Height / 3);
+                text.Draw(e.Graphics, "Press space to start and pause" + "\n"+"Use the arrow keys to move around" + "\n" + "Mines reduce the amount of balls collected" +"\n"+ "Collect 20 balls to level up", DisplayRectangle.Width / 3, DisplayRectangle.Height / 3);
             }
             text.Draw(e.Graphics, string.Format("Level: {0}", level) , DisplayRectangle.Width - 200, 20);
             UpdateBallsCollected(e.Graphics);
@@ -63,14 +63,14 @@ namespace HungryHippo
                 maxMines += 2;
                 AnimationTimer.Stop();
                 BallTimer.Stop();
-                text.Draw(e.Graphics, "Level Up Press Space For The Next level", DisplayRectangle.Width / 3, DisplayRectangle.Height / 2);
+                text.Draw(e.Graphics, "Level Up. Press Space For The Next level", DisplayRectangle.Width / 3, DisplayRectangle.Height / 2);
 
             }
         }
         private void UpdateBallsCollected(Graphics graphics)
         {
             string message = @"Balls Collected: {0}";
-            Font font = new Font("comicSans", 16);
+            Font font = new Font("comicSans", 24);
             SolidBrush brush = new SolidBrush(Color.Yellow);
             Point point = new Point(DisplayRectangle.Width / 3, 20);
             graphics.DrawString(string.Format(message, ballsCollected),font,brush,point);

@@ -14,9 +14,19 @@ namespace HungryHippo
         private Rectangle mineArea;
         private Rectangle gameArea;
         private int size = 30;
+        /// <summary>
+        /// X axis velocity
+        /// </summary>
         public int XVelocity { get; set; }
+        /// <summary>
+        /// Y axis velocity
+        /// </summary>
         public int YVelocity { get; set; }
 
+        /// <summary>
+        /// Constructor for the Mine object
+        /// </summary>
+        /// <param name="gameArea">Game area Rectangle</param>
         public Mine(Rectangle gameArea)
         {
             this.gameArea = gameArea;
@@ -32,22 +42,32 @@ namespace HungryHippo
             YVelocity = random.Next(-10, 10);
 
         }
-
+        /// <summary>
+        /// moves the mine
+        /// </summary>
         public void Move()
         {
             mineArea.X += XVelocity;
             mineArea.Y += YVelocity;
         }
-
+        /// <summary>
+        /// draws the mine
+        /// </summary>
+        /// <param name="graphics">graphics object from the paint event args</param>
         public void Draw(Graphics graphics)
         {
             graphics.DrawImage(mineImage, MineDisplayArea);
         }
+        /// <summary>
+        /// gets the display Rectangle of the mine
+        /// </summary>
         public Rectangle MineDisplayArea
         {
             get { return this.mineArea; }
         }
-
+        /// <summary>
+        /// gets the size of the mine
+        /// </summary>
         public int Size
         {
             get { return this.size; }
