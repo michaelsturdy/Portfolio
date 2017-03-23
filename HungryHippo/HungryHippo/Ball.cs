@@ -47,7 +47,7 @@ namespace HungryHippo
         /// <summary>
         /// draws the ball object
         /// </summary>
-        /// <param name="graphics">graphic from the paint event args</param>
+        /// <param name="graphics">graphic from the paint event arguments</param>
         public void Draw(Graphics graphics)
         {
             graphics.DrawImage(ballImage, ballDisplayArea);
@@ -58,6 +58,13 @@ namespace HungryHippo
         public Rectangle ballDisplayArea
         {
             get { return this.ballArea; }
+        }
+        /// <summary>
+        /// sets the y position of the ball area
+        /// </summary>
+        public int Y
+        {
+            set { ballArea.Y = value; }
         }
         /// <summary>
         /// gets the ball size

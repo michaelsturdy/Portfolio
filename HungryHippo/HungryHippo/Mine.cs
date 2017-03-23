@@ -31,8 +31,8 @@ namespace HungryHippo
             mineArea.Width = size;
 
             Random random = new Random();
-            mineArea.X = 20;//random.Next(10, gameArea.Width - size);
-            mineArea.Y = 20;//random.Next(10, gameArea.Height - size);
+            mineArea.X = 30;//random.Next(10, gameArea.Width - size);
+            mineArea.Y = 30;//random.Next(10, gameArea.Height - size);
 
             XVelocity = random.Next(-10, 10);
             YVelocity = random.Next(-10, 10);
@@ -60,6 +60,13 @@ namespace HungryHippo
         public Rectangle MineDisplayArea
         {
             get { return this.mineArea; }
+        }
+        /// <summary>
+        /// sets the y position of the mine area
+        /// </summary>
+        public int Y
+        {
+            set { mineArea.Y = value; }
         }
         /// <summary>
         /// gets the size of the mine

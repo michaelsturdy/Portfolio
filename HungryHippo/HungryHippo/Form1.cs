@@ -209,17 +209,19 @@ namespace HungryHippo
                 //ball touches top or bottom
                 else if (ball.ballDisplayArea.Y <= 0)
                 {
+                    ball.Y = 0;
                     ball.YVelocity = ball.YVelocity * -1;
                 }
                 else if (ball.ballDisplayArea.Y >= this.DisplayRectangle.Height - ball.Size)
                 {
+                    ball.Y = this.DisplayRectangle.Height - ball.Size;
                     ball.YVelocity = ball.YVelocity * -1;
                 }
                 
             }
             foreach (Mine mine in mines)
             {
-                //ball touches wall
+                //mine touches wall
                 if (mine.MineDisplayArea.X <= 0)
                 {
                     mine.XVelocity = mine.XVelocity * -1;
@@ -230,13 +232,15 @@ namespace HungryHippo
                 }
 
 
-                //ball touches top or bottom
+                //mine touches top or bottom
                 else if (mine.MineDisplayArea.Y <= 0)
                 {
+                    mine.Y = 0;
                     mine.YVelocity = mine.YVelocity * -1;
                 }
                 else if (mine.MineDisplayArea.Y >= this.DisplayRectangle.Height - mine.Size)
                 {
+                    mine.Y = this.DisplayRectangle.Height - mine.Size;
                     mine.YVelocity = mine.YVelocity * -1;
                 }
 
@@ -282,11 +286,11 @@ namespace HungryHippo
         /// <param name="e">event arguments</param>
         private void BallTimer_Tick(object sender, EventArgs e)
         {
-            if (balls.Count < 15)
+            if (balls.Count < 10)//limits the amount of balls on the screen at a time
             {
                 balls.Add(new Ball(this.DisplayRectangle));
             }
-            if (mines.Count < maxMines)
+            if (mines.Count < maxMines)//limits the amount of mines on the screen at a time
             {
                 mines.Add(new Mine(this.DisplayRectangle));
             }
