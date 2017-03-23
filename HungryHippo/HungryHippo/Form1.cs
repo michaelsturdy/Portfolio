@@ -67,6 +67,10 @@ namespace HungryHippo
 
             }
         }
+        /// <summary>
+        /// draws the balls collected message
+        /// </summary>
+        /// <param name="graphics">paint event argument graphics</param>
         private void UpdateBallsCollected(Graphics graphics)
         {
             string message = @"Balls Collected: {0}";
@@ -76,7 +80,11 @@ namespace HungryHippo
             graphics.DrawString(string.Format(message, ballsCollected),font,brush,point);
 
         }
-
+        /// <summary>
+        /// Listens for keys pressed
+        /// </summary>
+        /// <param name="sender">key pressed object</param>
+        /// <param name="e">Key event arguments</param>
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Space)
@@ -134,7 +142,11 @@ namespace HungryHippo
                 }
             }
         }
-
+        /// <summary>
+        /// Timer for animation
+        /// </summary>
+        /// <param name="sender">sending object</param>
+        /// <param name="e">Event arguments</param>
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
             
@@ -151,6 +163,9 @@ namespace HungryHippo
             Invalidate();
         }
 
+        /// <summary>
+        /// checks for object collisions
+        /// </summary>
         private void CheckForCollision()
         {
             balls.RemoveWhere(BallHitsHippo);
@@ -205,7 +220,11 @@ namespace HungryHippo
 
             }
         }
-
+        /// <summary>
+        /// checks if a ball hits the hippo
+        /// </summary>
+        /// <param name="ball">ball object to check</param>
+        /// <returns>true if collision occurs. false if none occur</returns>
         private bool BallHitsHippo(Ball ball)
         {
             if (ball.ballDisplayArea.IntersectsWith(hippo.DisplayArea))
@@ -216,7 +235,11 @@ namespace HungryHippo
             return false;
 
         }
-
+        /// <summary>
+        /// checks if a mine hits the hippo
+        /// </summary>
+        /// <param name="mine">mine object to check</param>
+        /// <returns>true if collision occurs. false if none occur</returns>
         private bool MineHitsHippo(Mine mine)
         {
             if (mine.MineDisplayArea.IntersectsWith(hippo.DisplayArea))
@@ -230,7 +253,11 @@ namespace HungryHippo
             }
             return false;
         }
-
+        /// <summary>
+        /// timer used for creating balls and mines
+        /// </summary>
+        /// <param name="sender">sending object</param>
+        /// <param name="e">event arguments</param>
         private void BallTimer_Tick(object sender, EventArgs e)
         {
             if (balls.Count < 20)
