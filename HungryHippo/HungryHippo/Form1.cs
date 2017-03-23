@@ -22,6 +22,7 @@ namespace HungryHippo
         Hippo hippo;
         HashSet<Ball> balls = new HashSet<Ball>();
         HashSet<Mine> mines = new HashSet<Mine>();
+        List<Keys> KeyList = new List<Keys>();
         public GameForm()
         {
             InitializeComponent();   
@@ -87,13 +88,54 @@ namespace HungryHippo
         /// <param name="e">Key event arguments</param>
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (AnimationTimer.Enabled)
+            {
+                switch (e.KeyData)
+                {
+                    case Keys.Left:
+                        {
+                            if (!KeyList.Contains(Keys.Left))
+                            {
+                                KeyList.Add(Keys.Left);
+                            }
+                            break;
+                        }
+                    case Keys.Right:
+                        {
+                            if (!KeyList.Contains(Keys.Right))
+                            {
+                                KeyList.Add(Keys.Right);
+                            }
+                            break;
+                        }
+
+                    case Keys.Up:
+                        {
+                            if (!KeyList.Contains(Keys.Up))
+                            {
+                                KeyList.Add(Keys.Up);
+                            }
+                            break;
+                        }
+                    case Keys.Down:
+                        {
+                            if (!KeyList.Contains(Keys.Down))
+                            {
+                                KeyList.Add(Keys.Down);
+                            }
+                            break;
+                        }
+                }
+
+            }
+
             if (e.KeyData == Keys.Space)
             {
                 if (gameStart)
                 {
                     gameStart = false;
                 }
-                
+
                 if (AnimationTimer.Enabled)
                 {
                     paused = true;
@@ -104,43 +146,13 @@ namespace HungryHippo
                 else
                 {
                     paused = false;
-                    
+
                     AnimationTimer.Start();
                     BallTimer.Start();
 
-                }             
-            }
-            
-
-            if (AnimationTimer.Enabled)
-            {
-                switch (e.KeyData)
-                {
-                    case Keys.Left:
-                        {
-                            hippo.Move(Hippo.Direction.Left);
-                            break;
-                        }
-                    case Keys.Right:
-                        {
-                            hippo.Move(Hippo.Direction.Right);
-                            break;
-                        }
-
-                    case Keys.Up:
-                        {
-                            hippo.Move(Hippo.Direction.Up);
-                            break;
-                        }
-                    case Keys.Down:
-                        {
-                            hippo.Move(Hippo.Direction.Down);
-                            break;
-                        }
-
-                   
                 }
             }
+
         }
         /// <summary>
         /// Timer for animation
@@ -149,8 +161,24 @@ namespace HungryHippo
         /// <param name="e">Event arguments</param>
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
-            
             CheckForCollision();
+            if (KeyList.Contains(Keys.Left))
+            {
+                hippo.Move(Hippo.Direction.Left);
+            }
+            if (KeyList.Contains(Keys.Right))
+            {
+                hippo.Move(Hippo.Direction.Right);
+            }
+            if (KeyList.Contains(Keys.Up))
+            {
+                hippo.Move(Hippo.Direction.Up);
+            }
+            if (KeyList.Contains(Keys.Down))
+            {
+                hippo.Move(Hippo.Direction.Down);
+            }
+            
             foreach (Ball ball in balls)
             {
                 ball.Move();
@@ -260,7 +288,7 @@ namespace HungryHippo
         /// <param name="e">event arguments</param>
         private void BallTimer_Tick(object sender, EventArgs e)
         {
-            if (balls.Count < 20)
+            if (balls.Count < 15)
             {
                 balls.Add(new Ball(this.DisplayRectangle));
             }
@@ -270,5 +298,52 @@ namespace HungryHippo
             }
 
          }
+        /// <summary>
+        /// Listens for Key up
+        /// </summary>
+        /// <param name="sender">sender object</param>
+        /// <param name="e">Key Event Arguments</param>
+        private void GameForm_KeyUp(object sender, KeyEventArgs e)
+        {
+                switch (e.KeyData)
+                {
+                    case Keys.Left:
+                        {
+                            if (KeyList.Contains(Keys.Left))
+                            {
+                                KeyList.Remove(Keys.Left);
+                            }
+                            break;
+                        }
+                    case Keys.Right:
+                        {
+                            if (KeyList.Contains(Keys.Right))
+                            {
+                                KeyList.Remove(Keys.Right);
+                            }
+                            break;
+                        }
+
+                    case Keys.Up:
+                        {
+                            if (KeyList.Contains(Keys.Up))
+                            {
+                                KeyList.Remove(Keys.Up);
+                            }
+                            break;
+                        }
+                    case Keys.Down:
+                        {
+                            if (KeyList.Contains(Keys.Down))
+                            {
+                                KeyList.Remove(Keys.Down);
+                            }
+                            break;
+                        }
+
+
+                }
+            
+        }
     }
 }
