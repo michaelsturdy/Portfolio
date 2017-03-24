@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.AnimationTimer = new System.Windows.Forms.Timer(this.components);
             this.BallTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -53,6 +54,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameForm";
             this.Text = "HungryHippoGame";
             this.Load += new System.EventHandler(this.GameForm_Load);
