@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Assg4</string>
+    <string name="modify">Modify Videos</string>
+    <string name="Name">Name</string>
+    <string name="code">Video Code</string>
+    <string name="desc">Description</string>
+    <string name="rating">Rating</string>
+    <string name="Update">Update</string>
+    <string name="Create">Create</string>
+    <string name="Createnew">Create New</string>
+    <string name="Delete">Delete</string>
+</resources>
